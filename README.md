@@ -115,18 +115,42 @@ pip install -r requirements.txt
 
 > Tip: If you don't have model files and just want to see the UI, try uploading a small CSV or use the sample inputs in the Predict page.
 
-5. Start the app:
+5. Start the app locally:
 
 ```bash
 python app.py
 ```
 
-6. Open the app in your browser:
+6. Or run in Docker:
+
+```bash
+make docker-build
+make docker-run
+```
+
+7. Open the app in your browser:
 
 ```
 http://127.0.0.1:5000/
 ```
 
+---
+
+## ✅ CI & Tests
+
+This project includes a GitHub Actions workflow that runs tests on push and PRs to `main`. Run tests locally with:
+
+```bash
+pytest -q
+```
+
+---
+
+## 🧾 License & Contribution
+
+This repository is licensed under the MIT License. See the `LICENSE` file for details.
+
+Contributions are welcome — please see `CONTRIBUTING.md` for guidelines.
 ---
 
 ## 🧾 Usage
