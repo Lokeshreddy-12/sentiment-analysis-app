@@ -169,12 +169,3 @@ Contributions are welcome — please see `CONTRIBUTING.md` for guidelines.
 - Missing model files: Follow Quickstart step 4. The repo intentionally excludes heavy artifacts to keep cloning fast.
 - Git LFS: If you want to include very large images or models, use Git LFS to avoid bloating history.
 
----
-
-## 🧩 Contribution & License
-
-If you'd like, I can add an **MIT** license and a `CONTRIBUTING.md`. Reply **Yes** to add them and I will commit.
-
----
-
-If you'd like the README further shortened, or want a quick demo script to run without model files, tell me and I will add it.
