@@ -1,95 +1,120 @@
-# Sentiment Analysis Web App 🔍🙂😞
+# 📊 Sentiment Analysis Web App
 
-A Flask web app for sentiment analysis built with a simple pipeline (preprocessing, vectorizer, traditional classifier) and optional BERT/LSTM support if you provide the trained artifacts. The app provides:
+**Leveraging Social Media Analytics for Insightful Customer Sentiment and Preference Mapping**
 
-- Single-text sentiment prediction via a web form
-- Batch CSV upload for analysis
-- Model metrics page with interactive charts (Plotly)
-- A simulated realtime demo page
+This is a sentiment analysis web application built using Flask that allows users to analyze text data (single or bulk) and understand the underlying sentiment trends from social media or any textual source.
 
 ---
 
-## What I included in this repo ✅
-- All code and templates required to run the app (`app.py`, `templates/`, `static/`)
-- `requirements.txt` with required Python packages
-- `.gitignore` that excludes large artifacts, raw dataset and training checkpoints (`results/`, `*.h5`, `*.pt`, etc.)
+## 🚀 Project Overview
 
-> Note: I **did not** include large model artifacts (e.g. `sentiment_model.pkl`, `vectorizer.pkl`), the full training dataset (`IMDB-Dataset.csv`) or the `results/` folder. This keeps the repository small and focused on reproducibility.
+This application enables users to:
+
+- 🧠 Predict sentiment of individual text entries
+- 📁 Upload a CSV file for batch analysis
+- 📊 Visualize sentiment distributions and insights
+- 🌐 Use a web interface to make predictions in real time
+
+The goal is to help organizations and individuals understand public opinion, customer sentiment, and preference patterns from text data.
 
 ---
 
-## Quickstart — run locally (Windows)
+## 📌 Features
+
+- ✅ Single-text sentiment prediction via web form
+- ✅ Batch CSV upload for large datasets
+- 📈 Chart visualizations (e.g., sentiment distribution, word clouds)
+- 📊 Metrics page showing evaluation results
+- 🧪 Simple architecture with expandable model support
+
+---
+
+## 📁 File Structure
+
+```
+Sentiment-Analysis-App/
+├─ app.py                      # Flask app (entrypoint)
+├─ requirements.txt            # Python dependencies
+├─ README.md                   # Project documentation (this file)
+├─ Untitled.ipynb              # Notebook for training & evaluation
+├─ assets/                     # Small result images and thumbnails
+│  ├─ model_accuracy_bar.png
+│  ├─ wordcloud_positive.png
+│  └─ wordcloud_negative.png
+├─ templates/                  # HTML templates
+├─ static/                     # CSS and static assets
+├─ sentiment_model.pkl         # (optional) trained sklearn model (excluded from repo)
+├─ vectorizer.pkl              # (optional) vectorizer (excluded from repo)
+└─ results/                    # (excluded) training checkpoints & artifacts
+```
+
+---
+
+## ⚡ Quickstart — run locally (Windows)
+
 1. Clone the repo:
 
-   git clone https://github.com/<your-username>/<repo-name>.git
-   cd <repo-name>
+```bash
+git clone https://github.com/<your-username>/sentiment-analysis-app.git
+cd sentiment-analysis-app
+```
 
 2. Create and activate a virtual environment:
 
-   python -m venv venv
-   venv\Scripts\activate
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
 
 3. Install dependencies:
 
-   pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
 4. Obtain pretrained model artifacts (one of the options below):
-   - Option A (recommended): Download `sentiment_model.pkl` and `vectorizer.pkl` and place them in the project root. These are used by the default "Traditional" classifier branch in `app.py`.
-   - Option B: Train your models using the included notebook (`Untitled.ipynb`) and move the generated artifacts to the root.
-   - Option C: Provide a HuggingFace BERT folder called `bert_sentiment_model/` or an LSTM model file `lstm_sentiment_model.h5` if you want to use those branches.
+- Option A (recommended): Copy `sentiment_model.pkl` and `vectorizer.pkl` to the project root (used by default).
+- Option B: Train models using `Untitled.ipynb` and move artifacts to the root.
+- Option C: Provide a HuggingFace BERT folder `bert_sentiment_model/` or an LSTM file `lstm_sentiment_model.h5` to use those branches.
+
+> Tip: If you don't have model files and just want to see the UI, try uploading a small CSV or use the sample inputs in the Predict page.
 
 5. Start the app:
 
-   python app.py
+```bash
+python app.py
+```
 
-6. Open your browser at: http://127.0.0.1:5000/
+6. Open the app in your browser:
 
-
----
-
-## About the code
-- `app.py` — Flask app and prediction logic. It selects between three model types depending on available artifacts:
-  - `bert_sentiment_model/` directory → BERT (Transformers)
-  - `lstm_sentiment_model.h5` → LSTM
-  - `sentiment_model.pkl` + `vectorizer.pkl` → Traditional classifier (default)
-- `templates/` — HTML pages for home, prediction, results, metrics, realtime demo
-- `static/` — CSS and assets
-- `Untitled.ipynb` — Notebook used for training, evaluation, and saving model artifacts (not included in commit history if heavy files are produced)
-
+```
+http://127.0.0.1:5000/
+```
 
 ---
 
-## Result images to showcase performance 📊
-I added original result images to `assets/` so you can showcase real plots and wordclouds in the README. The files were optimized lightly and placed in `assets/`.
+## 🧾 Usage
 
-### Preview
-
-![Model Accuracy](assets/model_accuracy_bar.png)
-
-![Wordcloud (Positive)](assets/wordcloud_positive.png)
-
-![Wordcloud (Negative)](assets/wordcloud_negative.png)
-
-I kept the images reasonably sized so they render well in the README without making the repository large.
-
+- Home: Quick overview and prediction form
+- Predict: Single-text input; returns sentiment label and confidence-based score
+- Upload: CSV input — expects a `text` column; returns sentiment per row
+- Metrics: Displays saved evaluation metrics (if `model_metrics.pkl` exists)
+- Realtime: Simulated social feed demo for the given query
 
 ---
 
+## ⚠️ Notes & Troubleshooting
 
-
----
-
-## Notes & troubleshooting
-- NLTK corpora are downloaded at runtime in `app.py`. On first run you may see downloads for `punkt`, `stopwords`, and `wordnet`.
-- If the app complains about missing model files, follow Step 4 above. If you want, I can add a short script to auto-download models from a remote storage location.
-
+- NLTK data: On first run `app.py` downloads `punkt`, `stopwords`, and `wordnet`. Allow network access.
+- Missing model files: Follow Quickstart step 4. The repo intentionally excludes heavy artifacts to keep cloning fast.
+- Git LFS: If you want to include very large images or models, use Git LFS to avoid bloating history.
 
 ---
 
-## License & contribution
-If you'd like, I can add a `LICENSE` (MIT/Apache/BSD) file and a `CONTRIBUTING.md` with contribution guidelines.
+## 🧩 Contribution & License
 
+If you'd like, I can add an **MIT** license and a `CONTRIBUTING.md`. Reply **Yes** to add them and I will commit.
 
 ---
 
-If you want, I can now initialize the Git repo, commit only required files (code, templates, README, requirements), and create a **public** GitHub repo for you and push — do you want me to proceed with creating and pushing the remote repo now? Also tell me whether you'd like me to add a couple of small result images to `assets/` for showcase.
+If you'd like the README further shortened, or want a quick demo script to run without model files, tell me and I will add it.
