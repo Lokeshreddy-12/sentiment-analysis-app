@@ -37,11 +37,47 @@ Sentiment-Analysis-App/
 ├─ requirements.txt            # Python dependencies
 ├─ README.md                   # Project documentation (this file)
 ├─ Untitled.ipynb              # Notebook for training & evaluation
-├─ assets/                     # Small result images and thumbnails
-│  ├─ model_accuracy_bar.png
+├─ assets/                     # Result images and thumbnails (uploaded)
+│  ├─ Home.png
+│  ├─ Predict.png
+│  ├─ Prediction result.png
+│  ├─ Model Accuracy.png
+│  ├─ ROC Curve.png
 │  ├─ wordcloud_positive.png
 │  └─ wordcloud_negative.png
 ├─ templates/                  # HTML templates
+
+---
+
+## 🖼️ Screenshots
+
+**Home**
+
+![Home](assets/Home.png)
+
+**Predict (form)**
+
+![Predict](assets/Predict.png)
+
+**Prediction result**
+
+![Prediction result](assets/Prediction%20result.png)
+
+**Model metrics (accuracy)**
+
+![Model Accuracy](assets/Model%20Accuracy.png)
+
+**ROC curve**
+
+![ROC Curve](assets/ROC%20Curve.png)
+
+**Word clouds**
+
+![Positive wordcloud](assets/wordcloud_positive.png)
+
+![Negative wordcloud](assets/wordcloud_negative.png)
+
+---
 ├─ static/                     # CSS and static assets
 ├─ sentiment_model.pkl         # (optional) trained sklearn model (excluded from repo)
 ├─ vectorizer.pkl              # (optional) vectorizer (excluded from repo)
