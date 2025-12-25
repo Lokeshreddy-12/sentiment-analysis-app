@@ -168,5 +168,14 @@ def realtime():
         return render_template('realtime.html', query=query, sentiments=sentiments)
     return render_template('realtime.html')
 
+@app.route('/api/sentiment', methods=['POST'])
+def api_sentiment():
+    """JSON API endpoint. POST JSON like: {"text": "I love this"} """
+    data = request.get_json(silent=True)
+    if not data or 'text' not in data:
+        return {"error": "JSON body must include 'text' field"}, 400
+    sentiment, score = predict_sentiment(data['text'])
+    return {"sentiment": sentiment, "score": score, "model_type": model_type}, 200
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
