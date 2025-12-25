@@ -144,16 +144,6 @@ http://127.0.0.1:5000/
 
 ---
 
-## ✅ CI & Tests
-
-This project includes a GitHub Actions workflow that runs tests on push and PRs to `main`. Run tests locally with:
-
-```bash
-pytest -q
-```
-
----
-
 ## 🧾 License & Contribution
 
 This repository is licensed under the MIT License. See the `LICENSE` file for details.
