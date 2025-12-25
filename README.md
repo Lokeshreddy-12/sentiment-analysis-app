@@ -1,5 +1,7 @@
 # 📊 Sentiment Analysis Web App
 
+![CI](https://github.com/Lokeshreddy-12/sentiment-analysis-app/actions/workflows/ci.yml/badge.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg) ![Python](https://img.shields.io/badge/python-3.11-blue.svg)
+
 **Leveraging Social Media Analytics for Insightful Customer Sentiment and Preference Mapping**
 
 This is a sentiment analysis web application built using Flask that allows users to analyze text data (single or bulk) and understand the underlying sentiment trends from social media or any textual source.

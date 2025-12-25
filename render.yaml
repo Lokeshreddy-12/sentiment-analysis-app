@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: sentiment-analysis-app
+    env: docker
+    plan: free
+    disk: 1024
+    dockerfilePath: Dockerfile
+    region: oregon
+    repo: https://github.com/Lokeshreddy-12/sentiment-analysis-app
+    branch: main
