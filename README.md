@@ -36,7 +36,7 @@ Sentiment-Analysis-App/
 ├─ app.py                      # Flask app (entrypoint)
 ├─ requirements.txt            # Python dependencies
 ├─ README.md                   # Project documentation (this file)
-├─ Untitled.ipynb              # Notebook for training & evaluation
+├─ train_sentiment_model.ipynb # Notebook for training & evaluation
 ├─ assets/                     # Result images and thumbnails (uploaded)
 │  ├─ Home.png
 │  ├─ Predict.png
