@@ -7,22 +7,21 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
-import torch
 import os
 import emoji
 import numpy as np
-
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('punkt_tab')
 
 app = Flask(__name__)
 
 label_mapping = {1: "Positive 🙂", 0: "Negative 😞"}
 
-stop_words = set(stopwords.words('english'))
+# Initialize NLTK resources lazily; handle missing corpora at runtime
+try:
+    stop_words = set(stopwords.words('english'))
+except LookupError:
+    nltk.download('stopwords')
+    stop_words = set(stopwords.words('english'))
+
 lemmatizer = WordNetLemmatizer()
 
 def preprocess_text(text):
@@ -30,16 +29,27 @@ def preprocess_text(text):
     text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE)
     text = re.sub(r'@\w+|#\w+', '', text)
     text = re.sub(r'[^\w\s]', '', text)
-    tokens = word_tokenize(text)
+    # Ensure NLTK punkt tokenizer is available; download if missing
+    try:
+        tokens = word_tokenize(text)
+    except LookupError:
+        nltk.download('punkt')
+        tokens = word_tokenize(text)
     tokens = [lemmatizer.lemmatize(word) for word in tokens if word not in stop_words]
     return ' '.join(tokens)
 
-# Load the trained model
+# Load the trained model (import heavy libs lazily)
 if os.path.exists("bert_sentiment_model"):
+    # Import transformers and torch only when BERT model is present
+    from transformers import AutoTokenizer, AutoModelForSequenceClassification
+    import torch
     model = AutoModelForSequenceClassification.from_pretrained("bert_sentiment_model")
     tokenizer = AutoTokenizer.from_pretrained("bert_sentiment_model")
     model_type = "BERT"
 elif os.path.exists("lstm_sentiment_model.h5"):
+    # Import TensorFlow only when LSTM model is present
+    import tensorflow as tf
+    from tensorflow.keras.preprocessing.sequence import pad_sequences
     model = tf.keras.models.load_model("lstm_sentiment_model.h5")
     tokenizer = joblib.load("lstm_tokenizer.pkl")
     model_type = "LSTM"

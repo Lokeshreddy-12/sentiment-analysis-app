@@ -115,6 +115,12 @@ pip install -r requirements.txt
 
 > Tip: If you don't have model files and just want to see the UI, try uploading a small CSV or use the sample inputs in the Predict page.
 
+**Optional:** If you want to use larger models (BERT/TensorFlow), install optional ML dependencies:
+
+```bash
+pip install -r requirements-ml.txt
+```
+
 5. Start the app locally:
 
 ```bash

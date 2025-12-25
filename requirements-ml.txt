@@ -1,0 +1,4 @@
+# Optional heavy ML deps (install only if you need BERT/Large models)
+transformers
+torch
+tensorflow
