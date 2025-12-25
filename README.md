@@ -59,28 +59,23 @@ A Flask web app for sentiment analysis built with a simple pipeline (preprocessi
 
 ---
 
-## Should I include result images to showcase performance? 🤔
-Yes — I added a couple of small representative images to `assets/` to showcase results. I included SVG thumbnails (optimized and small) so they render well in the README without adding large files.
+## Result images to showcase performance 📊
+I added original result images to `assets/` so you can showcase real plots and wordclouds in the README. The files were optimized lightly and placed in `assets/`.
 
 ### Preview
 
-![Accuracy](assets/accuracy_plot.svg)
+![Model Accuracy](assets/model_accuracy_bar.png)
 
-![ROC Curve](assets/roc_curve.svg)
+![Wordcloud (Positive)](assets/wordcloud_positive.png)
 
-I still recommend keeping only a few optimized images (<1MB each) rather than the full `results/` directory.
+![Wordcloud (Negative)](assets/wordcloud_negative.png)
+
+I kept the images reasonably sized so they render well in the README without making the repository large.
 
 
 ---
 
-## Alternative project name suggestions
-- SentimentScope
-- MoodLens
-- ReviewSense
-- SentimentPulse
-- OpinionAnalyzer
 
-Pick one or tell me if you prefer a different style (short, playful, professional).
 
 ---
 
