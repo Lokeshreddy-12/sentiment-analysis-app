@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200">
+  <style> .title{font:14px Arial; fill:#333;} .bar{fill:#4ecdc4;} .axis{stroke:#ccc; stroke-width:1;} </style>
+  <text x="10" y="20" class="title">Model Accuracy Comparison</text>
+  <rect x="50" y="60" width="120" height="100" class="bar"/>
+  <rect x="200" y="30" width="120" height="130" class="bar"/>
+  <rect x="350" y="80" width="120" height="80" class="bar"/>
+  <text x="110" y="180" style="font:12px Arial; fill:#333; text-anchor:middle">Model A</text>
+  <text x="260" y="180" style="font:12px Arial; fill:#333; text-anchor:middle">Model B</text>
+  <text x="410" y="180" style="font:12px Arial; fill:#333; text-anchor:middle">Model C</text>
+</svg>

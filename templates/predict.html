@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Sentiment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">Toggle Theme</div>
+    <div class="container">
+        <div class="card">
+            <h2>Predict Sentiment</h2>
+            <form method="post" class="form-group">
+                <textarea name="review" placeholder="Enter a social media post or review..." rows="5" required></textarea>
+                <button type="submit" class="btn btn-primary">Predict Sentiment</button>
+            </form>
+            {% if sentiment %}
+            <div class="result" style="animation: fadeIn 0.5s ease-in;">
+                <h3>Prediction Result</h3>
+                <p><strong>Model Used:</strong> {{ model_type }}</p>
+                <p><strong>Text:</strong> "{{ review }}"</p>
+                <p><strong>Sentiment:</strong> <span class="{{ sentiment.split()[0].lower() }}">{{ sentiment }}</span></p>
+                <div class="score-bar-container">
+                    <div class="score-bar">
+                        <div class="score-marker" style="left: {{ score }}%;"></div>
+                    </div>
+                    <div class="score-emojis">
+                        <span class="emoji very-negative" title="Very Negative">😡</span>
+                        <span class="emoji negative" title="Negative">😞</span>
+                        <span class="emoji neutral" title="Neutral">😐</span>
+                        <span class="emoji positive" title="Positive">😊</span>
+                        <span class="emoji very-positive" title="Very Positive">😄</span>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <form method="post" enctype="multipart/form-data" action="/upload" class="form-group">
+                <label for="file">Upload a CSV for batch predictions:</label>
+                <input type="file" name="file" id="file" accept=".csv" required>
+                <button type="submit" class="btn btn-secondary">Upload CSV</button>
+            </form>
+            <a href="/" class="btn btn-outline">Back to Home</a>
+        </div>
+    </div>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>

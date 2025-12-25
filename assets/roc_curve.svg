@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 600 300">
+  <style>.title{font:14px Arial; fill:#333;} .line{fill:none; stroke:#ff6b6b; stroke-width:3;} .diag{fill:none; stroke:#ccc; stroke-dasharray:4 4;} </style>
+  <text x="10" y="20" class="title">ROC Curve</text>
+  <path d="M80 250 C160 140 300 120 520 40" class="line"/>
+  <line x1="60" y1="260" x2="540" y2="20" class="diag"/>
+  <text x="60" y="280" style="font:12px Arial; fill:#333;">0.0</text>
+  <text x="540" y="10" style="font:12px Arial; fill:#333;">1.0</text>
+</svg>

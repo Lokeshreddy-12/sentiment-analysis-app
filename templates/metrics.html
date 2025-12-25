@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Metrics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">Toggle Theme</div>
+    <div class="container">
+        <div class="card">
+            <h2>Model Performance Metrics</h2>
+            
+            <!-- Accuracy Comparison Bar Chart -->
+            <h3>Accuracy Comparison</h3>
+            <div id="accuracy-chart" style="animation: fadeIn 0.5s ease-in;"></div>
+            <script>
+                var accuracyData = [{
+                    x: {{ accuracy_data|map(attribute='name')|list|tojson }},
+                    y: {{ accuracy_data|map(attribute='accuracy')|list|tojson }},
+                    type: 'bar',
+                    marker: {
+                        color: {{ accuracy_data|map(attribute='color')|list|tojson }}
+                    }
+                }];
+                var accuracyLayout = {
+                    title: 'Model Accuracy Comparison',
+                    xaxis: { title: 'Model' },
+                    yaxis: { title: 'Accuracy', range: [0, 1] },
+                    paper_bgcolor: 'rgba(0,0,0,0)',
+                    plot_bgcolor: 'rgba(0,0,0,0)',
+                    margin: { t: 50, b: 100, l: 50, r: 50 },
+                    font: { color: document.body.classList.contains('dark-mode') ? '#f0f0f0' : '#333' }
+                };
+                Plotly.newPlot('accuracy-chart', accuracyData, accuracyLayout);
+            </script>
+
+            <!-- Metrics Table -->
+            {{ metrics_html | safe }}
+
+            <!-- ROC Curves -->
+            <h3>ROC Curves</h3>
+            <div id="roc-chart" style="animation: fadeIn 0.5s ease-in;"></div>
+            <script>
+                var rocData = [
+                    {% for model in roc_data %}
+                    {
+                        x: {{ model.fpr | tojson }},
+                        y: {{ model.tpr | tojson }},
+                        name: '{{ model.name }}',
+                        type: 'scatter',
+                        mode: 'lines',
+                        line: { color: '{{ model.color }}' }
+                    },
+                    {% endfor %}
+                    {
+                        x: [0, 1],
+                        y: [0, 1],
+                        name: 'Random Guess',
+                        type: 'scatter',
+                        mode: 'lines',
+                        line: { color: '#ccc', dash: 'dash' }
+                    }
+                ];
+                var rocLayout = {
+                    title: 'ROC Curves for All Models',
+                    xaxis: { title: 'False Positive Rate' },
+                    yaxis: { title: 'True Positive Rate' },
+                    paper_bgcolor: 'rgba(0,0,0,0)',
+                    plot_bgcolor: 'rgba(0,0,0,0)',
+                    showlegend: true,
+                    margin: { t: 50, b: 50, l: 50, r: 50 },
+                    font: { color: document.body.classList.contains('dark-mode') ? '#f0f0f0' : '#333' }
+                };
+                Plotly.newPlot('roc-chart', rocData, rocLayout);
+            </script>
+
+            <a href="/" class="btn btn-outline">Back to Home</a>
+        </div>
+    </div>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+            // Update chart font colors on theme change
+            accuracyLayout.font.color = document.body.classList.contains('dark-mode') ? '#f0f0f0' : '#333';
+            rocLayout.font.color = document.body.classList.contains('dark-mode') ? '#f0f0f0' : '#333';
+            Plotly.update('accuracy-chart', {}, accuracyLayout);
+            Plotly.update('roc-chart', {}, rocLayout);
+        }
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>

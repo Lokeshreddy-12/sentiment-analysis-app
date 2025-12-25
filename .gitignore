@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Data and models
+results/
+*.safetensors
+*.pt
+*.pth
+*.h5
+sentiment_model.pkl
+vectorizer.pkl
+model_metrics.pkl
+IMDB-Dataset.csv
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/

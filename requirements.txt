@@ -1,0 +1,10 @@
+Flask>=2.0
+pandas
+joblib
+nltk
+numpy
+scikit-learn
+emoji
+transformers
+torch
+plotly

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">Toggle Theme</div>
+    <div class="hero">
+        <div class="container">
+            <h1>Sentiment Analysis of Social Media Data</h1>
+            <p>Discover the emotions behind social media posts and reviews with our advanced machine learning models.</p>
+            <a href="/predict" class="btn btn-primary">Get Started</a>
+            <a href="/metrics" class="btn btn-secondary">View Model Metrics</a>
+            <a href="/realtime" class="btn btn-secondary">Real-Time Analysis</a>
+        </div>
+    </div>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>

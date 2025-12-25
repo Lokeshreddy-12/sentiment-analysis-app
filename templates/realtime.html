@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">Toggle Theme</div>
+    <div class="container">
+        <div class="card">
+            <h2>Real-Time Sentiment Analysis (Simulated)</h2>
+            <form method="post" class="form-group">
+                <input type="text" name="query" placeholder="Enter a keyword or hashtag (e.g., #technology)" required>
+                <button type="submit" class="btn btn-primary">Analyze Posts</button>
+            </form>
+            {% if query %}
+            <h3>Results for "{{ query }}"</h3>
+            <table class="data">
+                <tr><th>Username</th><th>Post</th><th>Sentiment</th><th>Score</th><th>Likes</th></tr>
+                {% for item in sentiments %}
+                <tr>
+                    <td>{{ item.username }}</td>
+                    <td>{{ item.text }}</td>
+                    <td><span class="{{ item.sentiment.split()[0].lower() }}">{{ item.sentiment }}</span></td>
+                    <td>{{ item.score }}</td>
+                    <td>{{ item.likes }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div id="sentiment-chart" style="animation: fadeIn 0.5s ease-in;"></div>
+            <script>
+                var data = [{
+                    x: {{ sentiments|map(attribute='sentiment')|list|tojson }},
+                    y: {{ sentiments|map(attribute='score')|list|tojson }},
+                    type: 'bar',
+                    marker: { color: '#007bff' }
+                }];
+                var layout = {
+                    title: 'Sentiment Distribution for "{{ query }}"',
+                    xaxis: { title: 'Sentiment' },
+                    yaxis: { title: 'Score' },
+                    paper_bgcolor: 'rgba(0,0,0,0)',
+                    plot_bgcolor: 'rgba(0,0,0,0)'
+                };
+                Plotly.newPlot('sentiment-chart', data, layout);
+            </script>
+            {% endif %}
+            <a href="/" class="btn btn-outline">Back to Home</a>
+        </div>
+    </div>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
