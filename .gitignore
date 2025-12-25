@@ -10,8 +10,6 @@ results/
 *.pt
 *.pth
 *.h5
-sentiment_model.pkl
-vectorizer.pkl
 model_metrics.pkl
 IMDB-Dataset.csv
 

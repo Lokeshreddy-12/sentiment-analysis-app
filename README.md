@@ -79,8 +79,8 @@ Sentiment-Analysis-App/
 
 ---
 ├─ static/                     # CSS and static assets
-├─ sentiment_model.pkl         # (optional) trained sklearn model (excluded from repo)
-├─ vectorizer.pkl              # (optional) vectorizer (excluded from repo)
+├─ sentiment_model.pkl         # (included) trained sklearn model (sample)
+├─ vectorizer.pkl              # (included) vectorizer (sample)
 └─ results/                    # (excluded) training checkpoints & artifacts
 ```
 
@@ -109,8 +109,8 @@ pip install -r requirements.txt
 ```
 
 4. Obtain pretrained model artifacts (one of the options below):
-- Option A (recommended): Copy `sentiment_model.pkl` and `vectorizer.pkl` to the project root (used by default).
-- Option B: Train models using `Untitled.ipynb` and move artifacts to the root.
+- Option A (recommended): This repository includes a **small sample** `sentiment_model.pkl` and `vectorizer.pkl` so you can run the app immediately. To use your own trained artifacts, replace these files in the project root with your versions.
+- Option B: Train models using `train_sentiment_model.ipynb` and move artifacts to the root.
 - Option C: Provide a HuggingFace BERT folder `bert_sentiment_model/` or an LSTM file `lstm_sentiment_model.h5` to use those branches.
 
 > Tip: If you don't have model files and just want to see the UI, try uploading a small CSV or use the sample inputs in the Predict page.
